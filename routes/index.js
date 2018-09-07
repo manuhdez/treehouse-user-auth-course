@@ -19,6 +19,20 @@ router.get('/profile', function(req, res, next) {
       });
 });
 
+// GET /logout
+router.get('/logout', (req, res, next) => {
+  if (req.session) {
+    // delete any session object
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
+
 // GET /login
 router.get('/login', function(req, res, next) {
   return res.render('login', { title: 'Log In'});
